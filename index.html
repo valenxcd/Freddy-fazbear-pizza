@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fazbear Entertainment - Pizzería</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background-color: #ffeb3b;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #f44336;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+        }
+        .logo {
+            max-width: 300px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+        nav {
+            background-color: #333;
+            padding: 10px;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        nav a:hover {
+            color: #ffeb3b;
+        }
+        .hero {
+            text-align: center;
+            padding: 50px 20px;
+            background-image: url('https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+        }
+        .freddy-head {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform 0.3s;
+            position: relative;
+            object-fit: cover;
+        }
+        .freddy-head:hover {
+            transform: scale(1.1);
+        }
+        .freddy-options {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: white;
+            border: 2px solid #f44336;
+            border-radius: 10px;
+            padding: 20px;
+            width: 300px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .freddy-options button {
+            display: block;
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        .freddy-options button:hover {
+            background-color: #45a049;
+        }
+        .reserve-form {
+            display: none;
+            margin-top: 10px;
+        }
+        .reserve-form input, .reserve-form button {
+            display: block;
+            width: 100%;
+            margin: 5px 0;
+        }
+        .job-section {
+            display: none;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .job-section h2 {
+            text-align: center;
+            color: #f44336;
+        }
+        .job-form {
+            display: flex;
+            flex-direction: column;
+        }
+        .job-form label {
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+        .job-form input, .job-form select, .job-form textarea {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+        .job-form textarea {
+            height: 100px;
+            resize: vertical;
+        }
+        .back-button {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .back-button:hover {
+            background-color: #d32f2f;
+        }
+        .menu {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .menu h2 {
+            text-align: center;
+            color: #f44336;
+        }
+        .pizza-item {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+            border: 2px solid #f44336;
+            border-radius: 10px;
+            padding: 20px;
+            background-color: white;
+        }
+        .pizza-item img {
+            width: 150px;
+            height: 150px;
+            border-radius: 10px;
+            margin-right: 20px;
+        }
+        .pizza-details {
+            flex: 1;
+        }
+        .price {
+            font-size: 1.5em;
+            color: #4caf50;
+            font-weight: bold;
+        }
+        button {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="https://i.imgur.com/qMsexb9.png" alt="Fazbear Entertainment Logo" class="logo">
+    </header>
+    
+    <nav>
+        <a href="#menu">Menú</a>
+        <a href="#about">Sobre Nosotros</a>
+        <a href="#contact">Contacto</a>
+    </nav>
+    
+    <section class="hero" id="hero">
+        <h2>¡Bienvenido a Fazbear Entertainment!</h2>
+        <p>Disfruta de nuestras pizzas deliciosas mientras nuestros animatrónicos te entretienen. ¡Haz clic en la imagen para más opciones!</p>
+        
+        <img src="https://i.imgur.com/FRbn4wt.png" alt="Imagen de FNAF" class="freddy-head" onclick="openFreddy()">
+        
+        <div class="freddy-options" id="freddy-options">
+            <button onclick="showPrices()">Precios</button>
+            <button onclick="showLocation()">Ubicación</button>
+            <button onclick="showReserve()">Reservar</button>
+            <button onclick="showJobs()">Solicitud de Trabajo</button>
+            <div class="reserve-form" id="reserve-form">
+                <label for="reserve-day">¿Para qué día quieres reservar?</label>
+                <input type="date" id="reserve-day">
+                <button onclick="submitReserve()">Confirmar Reserva</button>
+            </div>
+        </div>
+    </section>
+    
+    <section class="job-section" id="job-section">
+        <h2>Solicitud de Trabajo</h2>
+        <p>¿Quieres unirte al equipo de Fazbear Entertainment? ¡Envía tu solicitud para uno de nuestros emocionantes roles! Recuerda que algunos puestos requieren valentía y dedicación.</p>
+        
+        <form class="job-form" onsubmit="submitJobApplication(event)">
+            <label for="name">Nombre Completo:</label>
+            <input type="text" id="name" required>
+            
+            <label for="email">Correo Electrónico:</label>
+            <input type="email" id="email" required>
+            
+            <label for="phone">Teléfono:</label>
+            <input type="tel" id="phone" required>
+            
+            <label for="role">Rol Deseado:</label>
+            <select id="role" required>
+                <option value="">Selecciona un rol</option>
+                <option value="🍕 Cocinero de Pizzería">🍕 Cocinero de Pizzería</option>
+                <option value="🎭 Animador / Controlador de Animatrónicos">🎭 Animador / Controlador de Animatrónicos</option>
+                <option value="💡 Técnico de Mantenimiento Nocturno">💡 Técnico de Mantenimiento Nocturno</option>
+                <option value="📦 Encargado de Suministros">📦 Encargado de Suministros</option>
+                <option value="👮 Guardia de Seguridad Nocturno">👮 Guardia de Seguridad Nocturno</option>
+                <option value="🎨 Diseñador de Carteles y Publicidad">🎨 Diseñador de Carteles y Publicidad</option>
+                <option value="📢 Community Manager RP">📢 Community Manager RP</option>
+                <option value="🎤 Presentador de Shows">🎤 Presentador de Shows</option>
+                <option value="🧽 Limpieza General (Importante y valiente)">🧽 Limpieza General (Importante y valiente)</option>
+                <option value="💼 Gerente de Sucursal">💼 Gerente de Sucursal</option>
+                <option value="⚙ Ingeniero de Animatrónicos">⚙ Ingeniero de Animatrónicos</option>
+            </select>
+            
+            <label for="experience">Experiencia Relevante (opcional):</label>
+            <textarea id="experience" placeholder="Describe tu experiencia previa..."></textarea>
+            
+            <label for="cover-letter">Carta de Presentación:</label>
+            <textarea id="cover-letter" required placeholder="Cuéntanos por qué quieres trabajar en Fazbear Entertainment..."></textarea>
+            
+            <button type="submit">Enviar Solicitud</button>
+            <button type="button" class="back-button" onclick="backToHero()">Volver</button>
+        </form>
+    </section>
+    
+    <section id="menu" class="menu">
+        <h2>Nuestro Menú de Pizzas</h2>
+        
+        <div class="pizza-item">
+            <img src="https://i.imgur.com/68U6hTi.jpg" alt="Pizza de Freddy">
+            <div class="pizza-details">
+                <h3>Pizza de Freddy Fazbear</h3>
+                <p>Pepperoni, queso cheddar y salsa especial. ¡Inspirada en nuestro oso estrella!</p>
+                <p class="price">$12.99</p>
+                <button onclick="addToCart('Pizza de Freddy Fazbear')">Agregar al Carrito</button>
+            </div>
+        </div>
+        
+        <div class="pizza-item">
+            <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Pizza de Bonnie">
+            <div class="pizza-details">
+                <h3>Pizza de Bonnie el Conejo</h3>
+                <p>Champiñones, pimientos y queso mozzarella. ¡Salta de deliciosa!</p>
+                <p class="price">$11.49</p>
+                <button onclick="addToCart('Pizza de Bonnie el Conejo')">Agregar al Carrito</button>
+            </div>
+        </div>
+        
+        <div class="pizza-item">
+            <img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Pizza de Chica">
+            <div class="pizza-details">
+                <h3>Pizza de Chica la Gallina</h3>
+                <p>Pollo, piña y salsa barbacoa. ¡Canta por más!</p>
+                <p class="price">$13.99</p>
+                <button onclick="addToCart('Pizza de Chica la Gallina')">Agregar al Carrito</button>
+            </div>
+        </div>
+        
+        <div class="pizza-item">
+            <img src="https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Pizza Foxy">
+            <div class="pizza-details">
+                <h3>Pizza de Foxy el Pirata</h3>
+                <p>Jamón, aceitunas y queso parmesano. ¡Aventura en cada bocado!</p>
+                <p class="price">$14.49</p>
+                <button onclick="addToCart('Pizza de Foxy el Pirata')">Agregar al Carrito</button>
+            </div>
+        </div>
+    </section>
+    
+    <section id="about" style="padding: 20px; text-align: center; background-color: #f0f0f0;">
+        <h2>Sobre Nosotros</h2>
+        <p>Fazbear Entertainment es el lugar perfecto para familias. Nuestras pizzas son hechas con ingredientes frescos, y nuestros animatrónicos ofrecen shows inolvidables. ¡Ven y únete a la diversión!</p>
+    </section>
+    
+    <footer id="contact">
+        <p>Horarios: Lunes a Domingo, 10 AM - 10 PM</p>
+        <p>Dirección: 123 Calle Animatrónica, Ciudad Ficticia</p>
+        <p>Teléfono: (555) 123-4567 | Email: info@fazbear.com</p>
+    </footer>
+    
+    <script>
+        function openFreddy() {
+            const options = document.getElementById('freddy-options');
+            options.style.display = options.style.display === 'block' ? 'none' : 'block';
+        }
+        
+        function showPrices() {
+            window.location.href = '#menu';
+        }
+        
+        function showLocation() {
+            alert('Ubicación: Casa 24 Brookhaven');
+        }
+        
+        function showReserve() {
+            const options = document.getElementById('freddy-options');
+            options.style.display = 'none';
+            const reserveForm = document.getElementById('reserve-form');
+            reserveForm.style.display = reserveForm.style.display === 'block' ? 'none' : 'block';
+        }
+        
+        function showJobs() {
+            // Ocultar todas las secciones principales para simular "otra página"
+            document.getElementById('hero').style.display = 'none';
+            document.getElementById('menu').style.display = 'none';
+            document.getElementById('about').style.display = 'none';
+            document.getElementById('contact').style.display = 'none';
+            // Mostrar solo la sección de trabajos
+            document.getElementById('job-section').style.display = 'block';
+        }
+        
+        function backToHero() {
+            // Ocultar la sección de trabajos
+            document.getElementById('job-section').style.display = 'none';
+            // Mostrar todas las secciones principales
+            document.getElementById('hero').style.display = 'block';
+            document.getElementById('menu').style.display = 'block';
+            document.getElementById('about').style.display = 'block';
+            document.getElementById('contact').style.display = 'block';
+        }
+        
+        function submitReserve() {
+            const day = document.getElementById('reserve-day').value;
+            if (day) {
+                alert(`¡Reserva confirmada para el ${day}! Te esperamos en Casa 24 Brookhaven.`);
+            } else {
+                alert('Por favor, selecciona un día.');
+            }
+        }
+        
+        function submitJobApplication(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const role = document.getElementById('role').value;
+            const experience = document.getElementById('experience').value;
+            const coverLetter = document.getElementById('cover-letter').value;
+            
+            alert(`¡Solicitud enviada! Nombre: ${name}, Email: ${email}, Rol: ${role}. Revisaremos tu aplicación pronto. (En un sitio real, esto se enviaría a un servidor).`);
+            
+            // Limpiar formulario
+            document.querySelector('.job-form').reset();
+        }
+        
+        function addToCart(pizza) {
+            alert(`¡${pizza} agregada al carrito! (Funcionalidad básica - en un sitio real, esto conectaría a un sistema de pedidos)`);
+        }
+    </script>
+</body>
+</html>
